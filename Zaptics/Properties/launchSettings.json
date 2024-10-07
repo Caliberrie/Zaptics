@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Zaptics": {
+      "commandName": "Project",
+      "commandLineArgs": "--keepConsole"
+    }
+  }
+}
