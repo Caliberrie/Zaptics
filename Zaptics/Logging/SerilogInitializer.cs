@@ -19,15 +19,13 @@ namespace Zaptics.Logging
                 Directory.CreateDirectory(AppConfig.LogPath);
             }
 
-            var template = "[{Timestamp:HH:mm:ss.fff}] {Level:u1} {Message}{NewLine}{Exception}";
-            var path = Path.Combine(AppConfig.LogPath, $"zaptics-{DateUtil.Filestamp}.log");
-
-            Console.WriteLine($"Serilog File: {path}");
+            var template = "[{Timestamp:HH:mm:ss.fff} {Level:u1}]  {Message}{NewLine}{Exception}";
+            var path = Path.Combine(Environment.CurrentDirectory, "zaptics.log");
 
             using var logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
+                .MinimumLevel.Verbose()
                 .WriteTo.Console(outputTemplate: template)
-                .WriteTo.File(path, outputTemplate: template)
+                .WriteTo.File(path, outputTemplate: template, flushToDiskInterval: TimeSpan.FromSeconds(1))
                 .CreateLogger();
 
             Log.Logger = logger;

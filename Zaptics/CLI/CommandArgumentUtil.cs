@@ -18,6 +18,8 @@ namespace Zaptics.CLI
                 if (_args != null)
                     return _args;
                 _args = new Dictionary<string, string>();
+                
+                Log.Information("Parsing command line arguments.");
 
                 var rawArgs = Environment.GetCommandLineArgs();
                 foreach (var arg in rawArgs)
@@ -44,18 +46,21 @@ namespace Zaptics.CLI
 
                 foreach (var key in _args.Keys)
                 {
-                    Log.Information($"  - {key}: {_args[key]}");
+                    Log.Information($"  - {key}  {_args[key]}");
                 }
 
                 return _args;
             } 
         }
 
-        public static T? GetArg<T>(string name, T? defaultValue = default)
+        public static string? GetArg(string name, string defaultValue = default)
         {
-            var args = Environment.GetCommandLineArgs();
+            if (!Args.ContainsKey(name))
+                return defaultValue;
 
-            return default;
+            return Args[name];
         }
+
+        public static bool Exists(string name) => Args.ContainsKey(name);
     }
 }

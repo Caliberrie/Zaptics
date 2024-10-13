@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zaptics.CLI
+namespace Zaptics.UI
 {
-    public static class Win32ConsoleUtil
+    internal interface IDrawable
     {
-
+        public void Draw();
     }
 }

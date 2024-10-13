@@ -1,8 +1,8 @@
 ﻿using Serilog;
-using Zaptics.Configuration;
+using Zaptics.CLI;
 using Zaptics.Logging;
-using Zaptics.Utilities;
 using Zaptics.Version;
+using Zaptics.Win32;
 
 namespace Zaptics;
 
@@ -14,7 +14,25 @@ class Program
     {
         SerilogInitializer.Initialize();
         Log.Information($"Zaptics ({AppVersion.Current})");
-        Log.Warning($"Zaptics ({AppVersion.Current})");
-        Log.Error($"Zaptics ({AppVersion.Current})");
+
+        var shouldKeepConsole = CommandArgumentUtil.Exists("keepConsole");
+
+        if (shouldKeepConsole)
+        { 
+            Log.Information("Console is being kept open.");
+        }
+        else
+        {
+            Log.Information("Hiding console.");
+            Win32ConsoleUtil.Hide();
+        }
+
+        Log.Information("Creating SDL2 Window for UI.");
+
+        var mainWindow = new MainWindow();
+        mainWindow.Open();
+
+        Log.Information("Application closing.");
+        Log.CloseAndFlush();
     }
 }
