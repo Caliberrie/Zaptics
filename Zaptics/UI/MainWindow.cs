@@ -7,7 +7,6 @@ using Zaptics.UI;
 using Zaptics.UI.Panels;
 using Zaptics.UI.Panels.Subpanels;
 using Zaptics.Version;
-using Zaptics.Win32;
 
 public class MainWindow 
 {

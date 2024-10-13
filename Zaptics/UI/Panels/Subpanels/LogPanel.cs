@@ -11,8 +11,6 @@ namespace Zaptics.UI.Panels.Subpanels
 {
     internal class LogPanel : IDrawable
     {
-        private LogType _currentType = LogType.All;
-
         public void Draw()
         {
             ImGui.SetNextWindowPos(new Vector2(250, 720-250));
@@ -26,14 +24,16 @@ namespace Zaptics.UI.Panels.Subpanels
             ImGui.Text("Log Filter:");
 
             var logTypes = Enum.GetValues<LogType>();
-            for (var i = 0; i < logTypes.Length; i++)
-            {
-                var isActivated = _currentType.HasFlag(logTypes[i]);
-                
-                //ImGui.Button(logTypes[i].ToString(), buttonSize);
-                if (i != logTypes.Length - 1)
-                    ImGui.SameLine();
-            }
+            //for (var i = 0; i < logTypes.Length; i++)
+            ImGui.Button("All", buttonSize);
+            ImGui.SameLine();
+            ImGui.Button("Application", buttonSize);
+            ImGui.SameLine();
+            ImGui.Button("Interactions", buttonSize);
+            ImGui.SameLine();
+            ImGui.Button("Collar", buttonSize);
+            ImGui.SameLine();
+            ImGui.Button("Lovense", buttonSize);
 
             ImGui.Separator();
 

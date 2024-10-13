@@ -2,7 +2,7 @@
 using Zaptics.CLI;
 using Zaptics.Logging;
 using Zaptics.Version;
-using Zaptics.Win32;
+using Zaptics.WinApiInterop;
 
 namespace Zaptics;
 
